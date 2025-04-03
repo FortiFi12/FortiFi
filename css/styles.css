@@ -1,44 +1,43 @@
 /* Importing a Google Font */
-
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
 
-/* Changing the main font and background colour */
-
+/* Global Settings */
 body {
-	font-family: Raleway, sans-serif;
-	background-color: #fffcf8;
+  font-family: Raleway, sans-serif;
+  background-color: #FBFBFB; /* Clean, light background */
 }
 
-/* Changing the background colour for the header */
-
+/* Header Style */
 header {
-	background-color: #000060;
+  background-color: #773AFD; /* Bold purple header */
 }
 
-/* Changing the background color for the navigation bar */
-
+/* Navigation Bar */
 .navbar {
-	background-color: #fff0e0;
+  background-color: #56918B; /* Muted teal navbar */
 }
 
-/* Effect on social media buttons */
+/* Primary Button */
+.btn-primary {
+  background-color: #E8872C; /* Vibrant orange for call-to-action */
+  border-color: #E8872C;
+}
 
+/* Social Media Hover Effect */
 footer a:hover {
-	opacity: .5;
+  opacity: 0.5;
 }
 
-/* Corporate navbar */
-
+/* Corporate Navbar Active Link */
 #navbar-corporate a.active {
-	color: #800000;
-	font-weight: bold;
+  color: #E8872C; /* Orange for active corporate links */
+  font-weight: bold;
 }
 
-/* Hero Section shadow */
-
+/* Hero Section Text Shadow */
 .white-shadow {
-	text-shadow: -.01em -.01em .01em white,
-		.02em .02em .02em white,
-		0 0 .2em white,
-		0 0 .5em white;
+  text-shadow: -0.01em -0.01em 0.01em white,
+              0.02em 0.02em 0.02em white,
+              0 0 0.2em white,
+              0 0 0.5em white;
 }
