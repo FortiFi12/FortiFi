@@ -4,7 +4,7 @@
 /* Global Settings */
 body {
   font-family: Raleway, sans-serif;
-  background-color: #FBFBFB; /* Clean, light background */
+  background-color: #090909; /* Clean, light background */
 }
 
 /* Header Style */
@@ -41,3 +41,14 @@ footer a:hover {
               0 0 0.2em white,
               0 0 0.5em white;
 }
+
+.white {
+  color: #ffffff; /* White Text */
+}
+
+.plan-box {
+      border: 1px solid #ffffff;
+      background-color: #090909;
+      padding: 20px;
+      height: 100%;
+    }
