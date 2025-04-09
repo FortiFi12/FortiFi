@@ -9,7 +9,7 @@ body {
 
 /* Header Style */
 header {
-  background-color: #773AFD; /* Bold purple header */
+  background-color: #ffffff; /* Bold purple header */
 }
 
 /* Navigation Bar */
@@ -44,6 +44,27 @@ footer a:hover {
 
 .white {
   color: #ffffff; /* White Text */
+}
+
+.black {
+  color: #000000; /* Black Text */
+}
+
+@font-face {
+  font-family: 'Racing Mark Race';
+  src: url('./fonts/racingmarkrace.otf') format('opentype');
+}
+
+body, p, ul, ol, li{
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, .title {
+  font-family: 'Racing Mark Race', sans-serif;
+}
+
+h4 {
+  font-weight: bold;
 }
 
 .plan-box {
