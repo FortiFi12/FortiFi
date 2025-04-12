@@ -5,7 +5,7 @@
 body {
   font-family: Raleway, sans-serif;
   background: url('../images/backgroundtest.jpg') no-repeat center center fixed; background-size: cover;
-  background-color: #090909; /* Clean, Dark background */
+  background-color: #000000; /* Clean, Dark background */
 }
 
 /* Header Style */
@@ -67,3 +67,4 @@ h1, h2, h3, .title {
 h4 {
   font-weight: bold;
 }
+
