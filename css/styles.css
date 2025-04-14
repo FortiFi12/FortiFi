@@ -68,6 +68,14 @@ h4 {
   font-weight: bold;
 }
 
+.center{
+  text-align: center;
+}
+
+.right{
+  text-align: end;
+}
+
 .rounded-box {
   border: 2px solid #ccc;
   border-radius: 50px;
