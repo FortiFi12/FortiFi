@@ -20,6 +20,12 @@ header {
 
 /* Primary Button */
 .btn-primary {
+  background-color: #000000; /* Vibrant orange for call-to-action */
+  border-color: #000000;
+}
+
+/* Secondary Button */
+.btn-secondary {
   background-color: #E8872C; /* Vibrant orange for call-to-action */
   border-color: #E8872C;
 }
