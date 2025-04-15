@@ -4,7 +4,7 @@
 /* Global Settings */
 body {
   font-family: Raleway, sans-serif;
-  background: url('../images/backgroundtest.jpg') no-repeat center center fixed; background-size: cover;
+  background: url('../images/background.jpg') no-repeat center center fixed; background-size: cover;
   background-color: #000000; /* Clean, Dark background */
 }
 
@@ -99,4 +99,3 @@ h4 {
 .carousel-indicators {
   bottom: 0px; /* Increase this value to create more space */
 }
-
