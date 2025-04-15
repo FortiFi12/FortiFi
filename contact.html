@@ -60,33 +60,22 @@
       </div>
     </nav>
     <!-- End of navigation bar -->
-    <section class="container my-4">
-      <div class="border-start border-primary border-5 p-2 bg-primary bg-opacity-10 rounded">
-        <p>This is an example that uses two features of Bootstrap:</p>
-        <ul>
-          <li>
-            <a href="https://getbootstrap.com/docs/5.1/layout/grid/" target="_blank">The responsive gri</a>
-          </li>
-          <li>
-            <a href="https://getbootstrap.com/docs/5.1/components/card/" target="_blank">Cards</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
+ 
     <!-- A grid with cards
       Learn about grids at: https://getbootstrap.com/docs/5.1/layout/grid/
       Learn about cards at: https://getbootstrap.com/docs/5.1/components/card/
     -->
     <main class="container my-4">
       <div class="row g-3 justify-content-evenly">
-
+		<div class="col-12 text-center mb-4">
+			<h1>Meet the team</h1>	  
+		 </div>
         <!-- Card #1 -->
         <div class="col-sm-6 col-lg-4 col-xl-3">
           <div class="card shadow h-100">
             <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
             <div class="card-body">
-              <h5 class="card-title">Card #1</h5>
+              <h5 class="card-title">Nick Boender</h5>
               <p class="card-text">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
             </div>
             <div class="card-footer p-2 text-end">
@@ -100,7 +89,7 @@
           <div class="card shadow h-100">
             <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
             <div class="card-body">
-              <h5 class="card-title">Card #2</h5>
+              <h5 class="card-title">Costea Tudor</h5>
               <p class="card-text">Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum.</p>
             </div>
             <div class="card-footer p-2 text-end">
@@ -114,7 +103,7 @@
           <div class="card shadow h-100">
             <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
             <div class="card-body">
-              <h5 class="card-title">Card #3</h5>
+              <h5 class="card-title">Bozhidar Dimitrov</h5>
               <p class="card-text">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
             </div>
             <div class="card-footer p-2 text-end">
@@ -128,7 +117,7 @@
           <div class="card shadow h-100">
             <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
             <div class="card-body">
-              <h5 class="card-title">Card #4</h5>
+              <h5 class="card-title">Mary-Jean Acevedo</h5>
               <p class="card-text">Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum.</p>
             </div>
             <div class="card-footer p-2 text-end">
@@ -137,40 +126,44 @@
           </div>
         </div>
 
-        <!-- Card #5 -->
-        <div class="col-sm-6 col-lg-4 col-xl-3">
-          <div class="card shadow h-100">
-            <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
-            <div class="card-body">
-              <h5 class="card-title">Card #5</h5>
-              <p class="card-text">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
-            </div>
-            <div class="card-footer p-2 text-end">
-              <a href="#" class="btn btn-primary">Learn more</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card #6 -->
-        <div class="col-sm-6 col-lg-4 col-xl-3">
-          <div class="card shadow h-100">
-            <img class="img-fluid" src="images/placeholder.png" alt="Placeholder Image">
-            <div class="card-body">
-              <h5 class="card-title">Card #6</h5>
-              <p class="card-text">Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum.</p>
-            </div>
-            <div class="card-footer p-2 text-end">
-              <a href="#" class="btn btn-primary">Learn more</a>
-            </div>
-          </div>
-        </div>
-
+       
         <!-- That was the last card -->
 
       </div>
     </main>
     <!-- End of the grid with cards -->
-
+<section class="container-fluid">
+	  <div class="col-12 text-center mb-4">
+			<h1>Contact Us</h1>	  
+		 </div>
+	<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="fakeSignupForm">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" required>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea type="text" class="form-control" id="floatinginput" required></textarea>
+            <label for="floatingInput">Your question</label> 
+          </div>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Insert files if needed</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Sign Up</button>
+        </form>
+  
+        <!-- Success Message (Initially Hidden) -->
+        <div id="successMessage" style="display: none; color: green; margin-top: 10px;">
+          Thank you for getting in contact with us! We will get back to you as soon as possible.
+        </div>
+      </div>
+    </div>
+  </div>
+	  </section>
+	  
     <!-- A footer with socials -->
     <footer class="shadow-lg mt-auto py-4 bg-body">
       <div class="container d-flex justify-content-between align-items-center">
