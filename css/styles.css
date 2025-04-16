@@ -100,24 +100,48 @@ h4 {
   bottom: 0px; /* Increase this value to create more space */
 }
 
-/* Make sure the carousel inner container is positioned relative so the children can be positioned absolutely */
-#productCarousel .carousel-inner {
+#productCarousel {
   position: relative;
 }
 
-/* Center the carousel arrows vertically relative to the inner container */
+/* Constrain the carousel container width and center it */
+#productCarousel {
+  max-width: 500px;      /* Matches the image's intended width */
+  margin: 0 auto;        /* Centers horizontally */
+  position: relative;    /* So arrows and indicators can be absolutely positioned inside */
+}
+
+/* Ensure images adapt to that container width/height */
+#productCarousel .carousel-inner img {
+  width: 500px;           /* Force the image to 500px wide */
+  height: 500px;          /* Force height to 500px for a square shape */
+  object-fit: cover;      /* Crop the image to fit */
+  border-radius: 10px;    /* Or use your .rounded-image class if desired */
+}
+
+/* Center the carousel arrows vertically, and keep them inside the container */
 .carousel-control-prev,
 .carousel-control-next {
   top: 50%;
-  bottom: auto;
   transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
 }
 
-/* Place and center the indicators at the bottom of the image */
+.carousel-control-prev {
+  left: 10px;   /* Adjust as needed to move the arrow closer or farther from the left edge */
+}
+
+.carousel-control-next {
+  right: 10px;  /* Adjust as needed to move the arrow closer or farther from the right edge */
+}
+
+/* Center the carousel indicators at bottom of the container */
 .carousel-indicators {
   position: absolute;
   bottom: 15px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-124.5%);
 }
+
 
