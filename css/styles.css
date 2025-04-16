@@ -63,7 +63,9 @@ footer a:hover {
 
 @font-face {
   font-family: 'Racing Mark Race';
-  src: url('./fonts/racingmarkrace.otf') format('opentype');
+  src: 
+  url('./fonts/racingmarkrace.woff')  format('woff'),
+  url('./fonts/racingmarkrace.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -167,4 +169,8 @@ h4 {
   top: 0.2rem !important;
   right: 0.1rem !important;
   transform: translate(50%, -50%);
+}
+
+body {
+  padding-top: 89px; /* height of .navbar */
 }
