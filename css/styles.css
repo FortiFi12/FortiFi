@@ -152,11 +152,16 @@ h4 {
   transform: translateX(-124.5%);
 }
 
-#cartLink i {
-  font-size: 2rem; /* Increase this value as needed */
+/* make the cart icon a bit larger */
+#cart-icon {
+  font-size: 2rem;
 }
 
-#cartLink .badge {
-  position: relative;
-  top: -7px; /* Adjust this value as needed; try -5px, -10px, etc. */
+/* tweak badge size & position */
+#cartCount {
+  position: absolute;
+  font-size: .75rem;
+  top: 0.2rem !important;
+  right: 0.1rem !important;
+  transform: translate(50%, -50%);
 }
