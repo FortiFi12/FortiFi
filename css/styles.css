@@ -43,7 +43,7 @@ header {
 
 /* Badge */
 #cartCount {
-  background-color: black !important; /* Vibrant orange for Cart Number */
+  background-color: #E8872C !important; /* Vibrant orange for Cart Number */
   color: white !important;
 }
 
