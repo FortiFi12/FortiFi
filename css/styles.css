@@ -57,6 +57,10 @@ footer a:hover {
   color: #000000; /* Black Text */
 }
 
+.purple {
+  color: #773AFD; /* Purple Text */
+}
+
 @font-face {
   font-family: 'Racing Mark Race';
   src: url('./fonts/racingmarkrace.otf') format('opentype');
@@ -96,23 +100,23 @@ h4 {
   margin: 0 auto; /* Centers the box horizontally */
 }
 
-.carousel-indicators {
+#Values .carousel-indicators {
   bottom: 0px; /* Increase this value to create more space */
 }
 
-#productCarousel {
+#productCarousel1, #productCarousel2 {
   position: relative;
 }
 
 /* Constrain the carousel container width and center it */
-#productCarousel {
+#productCarousel, #productCarousel2 {
   max-width: 500px;      /* Matches the image's intended width */
   margin: 0 auto;        /* Centers horizontally */
   position: relative;    /* So arrows and indicators can be absolutely positioned inside */
 }
 
 /* Ensure images adapt to that container width/height */
-#productCarousel .carousel-inner img {
+#productCarousel, #productCarousel2 .carousel-inner img {
   width: 500px;           /* Force the image to 500px wide */
   height: 500px;          /* Force height to 500px for a square shape */
   object-fit: cover;      /* Crop the image to fit */
@@ -120,7 +124,7 @@ h4 {
 }
 
 /* Center the carousel arrows vertically, and keep them inside the container */
-.carousel-control-prev,
+#productCarousel1, #productCarousel2 .carousel-control-prev,
 .carousel-control-next {
   top: 50%;
   transform: translateY(-50%);
@@ -128,11 +132,11 @@ h4 {
   height: 40px;
 }
 
-.carousel-control-prev {
+#productCarousel1, #productCarousel2 .carousel-control-prev {
   left: 10px;   /* Adjust as needed to move the arrow closer or farther from the left edge */
 }
 
-.carousel-control-next {
+#productCarousel1, #productCarousel2 .carousel-control-next {
   right: 10px;  /* Adjust as needed to move the arrow closer or farther from the right edge */
 }
 
