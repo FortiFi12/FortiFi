@@ -4,9 +4,9 @@
 @font-face {
   font-family: 'Racing Mark Race';
   src: 
-  url('./fonts/racingmarkrace.woff')  format('woff'),
-  url('./fonts/racingmarkrace.woff2')  format('woff2'),
-  url('./fonts/racingmarkrace.otf') format('opentype');
+  url('../fonts/racingmarkrace.woff')  format('woff'),
+  url('../fonts/racingmarkrace.woff2')  format('woff2'),
+  url('../fonts/racingmarkrace.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -166,10 +166,11 @@ h4 {
 /* tweak badge size & position */
 #cartCount {
   position: absolute;
+  top: 1;
+  right: 1;
   font-size: .75rem;
-  top: 0.2rem !important;
-  right: 0.1rem !important;
-  transform: translate(50%, -50%);
+  padding: 0.25em 0.75em;
+  transform: translate(50%, -70%);
 }
 
 body {
