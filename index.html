@@ -63,16 +63,21 @@
           <a class="nav-link title" href="corporate.html">Corporate</a>
         </li>
       </ul>
-      <!-- Start Shopping Cart Link -->
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="cart.html" id="cartLink">
-            <!-- Bootstrap Icon for cart (make sure to include Bootstrap Icons in your head) -->
-            <i class="bi bi-cart me-1"></i><span id="cartCount" class="badge bg-danger">0</span>
-          </a>
-        </li>
-      </ul>
-      <!-- End Shopping Cart Link -->
+      <!-- Start Shopping Cart Dropdown in Navigation Bar -->
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="cartLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <!-- Cart Icon (enlarged with inline style or via CSS) -->
+      <i class="bi bi-cart" style="font-size:2rem;"></i>
+      <span id="cartCount" class="badge bg-danger">0</span>
+    </a>
+    <!-- Dropdown menu for cart items -->
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartLink" id="cartDropdown">
+      <li class="dropdown-item text-muted">Cart is empty.</li>
+    </ul>
+  </li>
+</ul>
+<!-- End Shopping Cart Dropdown -->
     </div>
   </div>
 </nav>
