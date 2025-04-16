@@ -269,48 +269,48 @@
     <!-- End of the footer -->
 	
 	<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const CART_KEY = 'shoppingCart';
-  let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  // simple cart array
+  const cart = [];
 
-  function updateCartDisplay() {
-    const count = cart.length;
-    document.getElementById('cartCount').innerText = count;
-
-    let html = '';
-    if (count === 0) {
-      html = '<li class="dropdown-item text-muted">Cart is empty</li>';
-    } else {
-      cart.forEach(item => {
-        html += `<li class="dropdown-item">
-                   ${item.name} (${item.size}) — $${item.price}
-                 </li>`;
-      });
-      html += '<li><hr class="dropdown-divider"></li>';
-      html += '<li><a class="dropdown-item text-center" href="checkout.html">Checkout</a></li>';
-    }
-    document.getElementById('cartDropdownMenu').innerHTML = html;
-  }
-
-  // initial render
-  updateCartDisplay();
-
-  // wire up all Add to Cart buttons
+  // find all "add-to-cart" buttons
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', () => {
-      const name  = btn.dataset.name;
-      const price = btn.dataset.price;
-      // find the size select in the same container
-      const sizeSelect = btn.closest('.container').querySelector('.product-size');
+      const productEl = btn.closest('.product');
+      const name = productEl.dataset.name;
+      const price = parseFloat(productEl.dataset.price);
+      const sizeSelect = productEl.querySelector('select');
       const size = sizeSelect ? sizeSelect.value : '';
-      cart.push({ name, price, size });
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-      updateCartDisplay();
+      
+      // push new item
+      cart.push({ name, size, price });
+      updateCartUI();
     });
   });
-});
+
+  function updateCartUI() {
+    // update badge
+    const countEl = document.getElementById('cartCount');
+    countEl.textContent = cart.length;
+
+    // rebuild dropdown
+    const menu = document.getElementById('cartDropdownMenu');
+    menu.innerHTML = ''; // clear
+
+    if (cart.length === 0) {
+      menu.innerHTML = '<li><span class="dropdown-item-text">Your cart is empty.</span></li>';
+      return;
+    }
+
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a class="dropdown-item" href="#">
+          ${item.name} (${item.size}) — $${item.price.toFixed(2)}
+        </a>`;
+      menu.appendChild(li);
+    });
+  }
 </script>
-  
-	  
+  	  
   </body>
 </html>
