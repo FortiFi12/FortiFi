@@ -41,6 +41,12 @@ header {
   border-color: #E8872C;
 }
 
+/* Badge */
+#cartCount {
+  background-color: black !important; /* Vibrant orange for Cart Number */
+  color: white !important;
+}
+
 /* Social Media Hover Effect */
 footer a:hover {
   opacity: 0.5;
