@@ -65,6 +65,7 @@ footer a:hover {
   font-family: 'Racing Mark Race';
   src: 
   url('./fonts/racingmarkrace.woff')  format('woff'),
+  url('./fonts/racingmarkrace.woff2')  format('woff2'),
   url('./fonts/racingmarkrace.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
