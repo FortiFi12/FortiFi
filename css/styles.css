@@ -1,6 +1,17 @@
 /* Importing a Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
 
+@font-face {
+  font-family: 'Racing Mark Race';
+  src: 
+  url('./fonts/racingmarkrace.woff')  format('woff'),
+  url('./fonts/racingmarkrace.woff2')  format('woff2'),
+  url('./fonts/racingmarkrace.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Global Settings */
 body {
   font-family: Raleway, sans-serif;
@@ -59,17 +70,6 @@ footer a:hover {
 
 .purple {
   color: #773AFD; /* Purple Text */
-}
-
-@font-face {
-  font-family: 'Racing Mark Race';
-  src: 
-  url('./fonts/racingmarkrace.woff')  format('woff'),
-  url('./fonts/racingmarkrace.woff2')  format('woff2'),
-  url('./fonts/racingmarkrace.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 body, p, ul, ol, li{
