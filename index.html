@@ -342,27 +342,36 @@
     </footer>
     <!-- End of the footer -->
 	
-	<script>
+	<!-- add this anywhere inside <body>, ideally just before your closing </body> -->
+<div id="notificationContainer" style="position:fixed; top:80px; right:20px; z-index:2000;"></div>
+
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-  // ─── State ─────────────────────────────────────────────
   const cart = [];
-  const cartCountEl       = document.getElementById('cartCount');
-  const cartDropdownMenu  = document.getElementById('cartDropdownMenu');
+  const cartCountEl      = document.getElementById('cartCount');
+  const cartDropdownMenu = document.getElementById('cartDropdownMenu');
+  const notifContainer   = document.getElementById('notificationContainer');
 
-  // ─── Helpers ───────────────────────────────────────────
+  // ─── Green notification helper ─────────────────────────────
+  function showNotification(msg) {
+    const alertEl = document.createElement('div');
+    alertEl.className = 'alert alert-success'; 
+    alertEl.textContent = msg;
+    notifContainer.appendChild(alertEl);
+    setTimeout(() => alertEl.remove(), 2500);
+  }
+
+  // ─── Rebuild cart dropdown ─────────────────────────────────
   function updateCart() {
-    // 1) badge count
     cartCountEl.textContent = cart.length;
-
-    // 2) rebuild dropdown
     cartDropdownMenu.innerHTML = '';
+
     if (cart.length === 0) {
       cartDropdownMenu.innerHTML = 
         '<li class="dropdown-item text-muted">Cart is empty</li>';
       return;
     }
 
-    // 3) list items & compute total
     let total = 0;
     cart.forEach((item, idx) => {
       total += parseFloat(item.price);
@@ -372,32 +381,26 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           ${item.name}${item.size ? ' ('+item.size+')' : ''} — €${item.price}
         </div>
-        <button 
-          class="btn btn-sm btn-link remove-item" 
-          data-index="${idx}"
-        >&times;</button>
+        <button class="btn btn-sm btn-link remove-item" data-index="${idx}">&times;</button>
       `;
       cartDropdownMenu.appendChild(li);
     });
 
-    // 4) total row
-    const totalLi = document.createElement('li');
-    totalLi.className = 'dropdown-item text-end fw-bold';
-    totalLi.textContent = `Total: €${total.toFixed(2)}`;
-    cartDropdownMenu.appendChild(totalLi);
+    // total row
+    cartDropdownMenu.insertAdjacentHTML('beforeend', `
+      <li class="dropdown-item text-end fw-bold">Total: €${total.toFixed(2)}</li>
+    `);
 
-    // 5) divider + checkout button
+    // divider + checkout link
     cartDropdownMenu.insertAdjacentHTML('beforeend','<li><hr class="dropdown-divider"></li>');
     cartDropdownMenu.insertAdjacentHTML('beforeend',`
       <li class="px-2">
-        <button id="checkoutButton" class="btn btn-success w-100">
-          Checkout
-        </button>
+        <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
       </li>
     `);
   }
 
-  // ─── Add to Cart Handler ─────────────────────────────────
+  // ─── Add‑to‑Cart binding ────────────────────────────────────
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
@@ -407,30 +410,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const size = sizeEl ? sizeEl.value : '';
       cart.push({ name, price, size });
       updateCart();
-      // simple pop‑up notification
-      alert(`${name}${size ? ' ('+size+')' : ''} added to cart`);
+      showNotification(`${name}${size ? ' ('+size+')' : ''} added to cart`);
     });
   });
 
-  // ─── Dropdown Delegation ────────────────────────────────
+  // ─── Remove‑item delegation ───────────────────────────────
   cartDropdownMenu.addEventListener('click', e => {
-    // remove item
     if (e.target.classList.contains('remove-item')) {
-      const idx = parseInt(e.target.dataset.index);
+      const idx = parseInt(e.target.dataset.index, 10);
       cart.splice(idx, 1);
       updateCart();
     }
-    // checkout button
-    else if (e.target.id === 'checkoutButton') {
-      alert('Proceeding to checkout…');
-      // → here you could redirect or open a checkout page
-    }
   });
 
-  // ─── Kickoff ────────────────────────────────────────────
+  // initial render
   updateCart();
 });
 </script>
+
 
 
   	  
