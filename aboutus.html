@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const notifContainer   = document.getElementById('notificationContainer');
 
   function showNotification(msg) {
-    if (!notifContainer) return; // Allow other pages to skip it
+    if (!notifContainer) return;
     const alertEl = document.createElement('div');
     alertEl.className = 'alert alert-success custom-notif';
     alertEl.textContent = msg;
@@ -348,19 +348,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => alertEl.remove(), 2500);
   }
 
-  function saveCart() {
+  function saveAndUpdateCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
+    renderCartUI();
   }
 
-  function updateCart() {
+  function renderCartUI() {
     if (!cartCountEl || !cartDropdownMenu) return;
 
     cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
     cartDropdownMenu.innerHTML = '';
 
-    if (!cart.length) {
+    if (cart.length === 0) {
       cartDropdownMenu.innerHTML = '<li class="dropdown-item text-muted">Cart is empty</li>';
-      saveCart(); // ✅ ensure empty cart is saved
       return;
     }
 
@@ -385,23 +385,20 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
       </li>
     `);
-
-    saveCart();
   }
 
-  // Remove items from cart
+  // Handle item removal
   if (cartDropdownMenu) {
     cartDropdownMenu.addEventListener('click', e => {
       if (e.target.classList.contains('remove-item')) {
         const idx = +e.target.dataset.index;
         cart.splice(idx, 1);
-        saveCart();    // ✅ important for keeping it empty after deletion
-        updateCart();
+        saveAndUpdateCart(); // ✅ critical to persist changes + refresh UI
       }
     });
   }
 
-  // Add-to-Cart logic (only runs on pages with add-to-cart buttons)
+  // Handle Add-to-Cart
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
@@ -417,14 +414,16 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.push({ name, price, size, qty: 1 });
       }
 
-      updateCart();
+      saveAndUpdateCart();
       showNotification(`${name}${size ? ' (' + size + ')' : ''} added to cart`);
     });
   });
 
-  updateCart(); // Run on load
+  // Initial render on page load
+  renderCartUI();
 });
 </script>
+
 
 
   </body>
