@@ -205,22 +205,56 @@
     <!-- End of the footer -->
 
     <!-- ### Scripts ### -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // wire up the modal
-      const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
-        backdrop: 'static', keyboard: false
-      });
+  function updateCheckoutTable() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.getElementById("checkoutItems");
+    const subtotalEl = document.getElementById("checkoutSubtotal");
 
-      document.getElementById('placeOrderBtn').addEventListener('click', function() {
-        // show infinite spinner
-        loadingModal.show();
-        // you can add order‑submission logic here,
-        // or after X seconds, you could do loadingModal.hide();
-      });
+    tbody.innerHTML = ""; // Clear current items
+    let subtotal = 0;
 
-      // your existing cart‑to‑table code goes here…
-    </script>
+    cart.forEach((item, index) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td class="text-center">${item.size}</td>
+        <td class="text-center">
+          <input type="number" class="form-control form-control-sm w-50 mx-auto" value="${item.qty}" min="1" data-index="${index}" onchange="updateQuantity(this)">
+        </td>
+        <td class="text-end">${(item.price * item.qty).toFixed(2)}</td>
+        <td class="text-end">
+          <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">&times;</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+      subtotal += item.price * item.qty;
+    });
+
+    subtotalEl.textContent = "€" + subtotal.toFixed(2);
+  }
+
+  function updateQuantity(input) {
+    const index = input.dataset.index;
+    const newQty = parseInt(input.value);
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    cart[index].qty = newQty;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCheckoutTable();
+  }
+
+  function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCheckoutTable();
+  }
+
+  // Call on page load
+  updateCheckoutTable();
+</script>
+
     <!-- ### End Scripts ### -->
   </body>
 </html>

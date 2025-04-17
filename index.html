@@ -432,21 +432,27 @@
 <!-- Cart + Notification Script -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const cart = [];
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
   const cartCountEl      = document.getElementById('cartCount');
   const cartDropdownMenu = document.getElementById('cartDropdownMenu');
   const notifContainer   = document.getElementById('notificationContainer');
 
-  <!-- showNotification › green bottom‑right pop‑up -->
+  // showNotification › green bottom‑right pop‑up
   function showNotification(msg) {
     const alertEl = document.createElement('div');
-    alertEl.className = 'alert alert-success custom-notif';  // you can add your own CSS class here if you like
+    alertEl.className = 'alert alert-success custom-notif';
     alertEl.textContent = msg;
     notifContainer.appendChild(alertEl);
     setTimeout(() => alertEl.remove(), 2500);
   }
 
-  <!-- rebuild cart dropdown contents -->
+  // Save cart to localStorage
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  // rebuild cart dropdown contents
   function updateCart() {
     cartCountEl.textContent = cart.length;
     cartDropdownMenu.innerHTML = '';
@@ -478,23 +484,27 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
       </li>
     `);
+
+    saveCart();
   }
 
-  <!-- bind Add‑to‑Cart buttons -->
+  // bind Add‑to‑Cart buttons
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
       const name  = productEl.dataset.name;
-      const price = productEl.dataset.price;
+      const price = parseFloat(productEl.dataset.price);
       const sizeEl = productEl.querySelector('select[name="product_size"]');
       const size = sizeEl ? sizeEl.value : '';
-      cart.push({ name, price, size });
+      const qty = 1;
+
+      cart.push({ name, price, size, qty });
       updateCart();
-      showNotification(`${name}${size? ' ('+size+')':''} added to cart`);
+      showNotification(`${name}${size ? ' (' + size + ')' : ''} added to cart`);
     });
   });
 
-  <!-- delegate “remove” clicks -->
+  // delegate “remove” clicks
   cartDropdownMenu.addEventListener('click', e => {
     if (e.target.classList.contains('remove-item')) {
       const idx = +e.target.dataset.index;
@@ -506,7 +516,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCart();
 });
 </script>
-
 
   	  
   </body>
