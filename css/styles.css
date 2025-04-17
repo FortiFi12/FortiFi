@@ -41,15 +41,10 @@ header {
   border-color: #E8872C;
 }
 
-.alert-success.custom-notif {
-  background-color: #E8872C;
-  border-color:   #FFFFFF;
-  text-color: #FFFFFF;
-}
-.btn-success.custom-checkout {
-  background-color: #E8872C;
-  border-color:   #FFFFFF;
-  text-color: #FFFFFF;
+.bg-brand-black {
+  background-color: black !important;
+  color: white !important;        /* ensure text stays readable */
+  border-color: white !important;
 }
 
 /* spinner color */
