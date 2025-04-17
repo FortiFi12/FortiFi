@@ -2,13 +2,6 @@
 <html lang="en" class="h-100">
   <head>
 	  
-	  <style>
-  body {
-    padding-top: 0 !important;
-  }
-</style>
-
-	  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,37 +28,111 @@
 </script>
     <!-- End of Google Analytics code -->
 
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	  
   </head>
   <body class="white h-100 d-flex flex-column">
 
     <!-- Navigation bar, adapted from https://getbootstrap.com/docs/5.1/components/navbar/ -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-  <img src="images/logo2.png" width="90" alt="FortiFi Logo">
-</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="index.html">
+      <img src="images/logo2.png" width="90" alt="FortiFi Logo">
+    </a>
+
+    <!-- Navbar Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Your Normal Menu Items -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item title">
+          <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <li class="nav-item title">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+        <li class="nav-item title">
+          <a class="nav-link" href="aboutus.html">About Us</a>
+        </li>
+        <li class="nav-item title">
+          <a class="nav-link" href="corporate.html">Corporate</a>
+        </li>
+      </ul>
+
+      <!-- Shopping Cart Dropdown -->
+      <ul class="navbar-nav me-4">
+        <li class="nav-item dropdown">
+
+          <!-- Cart toggle: larger icon + positioned badge -->
+          <a
+            class="nav-link position-relative"
+            href="#"
+            id="cartDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <!--  Cart icon with increased font-size -->
+            <i
+              id="cart-icon"
+              class="bi bi-cart"
+              style="font-size:1.5rem;"
+            ></i>
+
+            <!--  Badge positioned top-right of icon -->
+            <span
+              id="cartCount"
+              class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
+            >
+              0
+            </span>
+          </a>
+
+          <!-- Dropdown menu: will be populated by your JS -->
+          <ul
+            class="dropdown-menu dropdown-menu-end p-2"
+            aria-labelledby="cartDropdown"
+            style="min-width:240px;"
+            id="cartDropdownMenu"
+          >
+            <li class="dropdown-item text-muted">
+              Cart is empty
+            </li>
+			
+			<!-- Checkout Button ▼ -->  
+			<li><hr class="dropdown-divider"></li>
+      <li class="px-2">
+        <button id="checkoutButton"
+                class="btn btn-success w-100">
+          Checkout
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item title">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-			<li class="nav-item title">
-              <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
-            </li>  
-			<li class="nav-item title">
-              <a class="nav-link" href="aboutus.html">About Us</a>
-            </li>
-            <li class="nav-item title">
-              <a class="nav-link" href="corporate.html">Corporate</a>
-            </li>
+      </li>  
+			  
           </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End of navigation bar -->
+        </li>
+      </ul>
+      <!-- End Cart -->
+
+    </div>
+  </div>
+</nav>
+<!-- End of navigation bar -->
  
 	  <br>
 	  
