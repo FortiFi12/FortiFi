@@ -133,7 +133,9 @@ h4 {
 }
 
 #Values .carousel-indicators {
-  bottom: 0px; /* Increase this value to create more space */
+  bottom: 0px; /* Adjust this value to move indicators upwards */
+  left: 35%; /* Center horizontally */
+  transform: translateX(-50%); /* Ensures perfect centering */
 }
 
 #productCarousel1, #productCarousel2 {
