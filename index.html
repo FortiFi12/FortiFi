@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- showNotification › green bottom‑right pop‑up -->
   function showNotification(msg) {
     const alertEl = document.createElement('div');
-    alertEl.className = 'alert alert-success';  // you can add your own CSS class here if you like
+    alertEl.className = 'alert alert-success custom-notif';  // you can add your own CSS class here if you like
     alertEl.textContent = msg;
     notifContainer.appendChild(alertEl);
     setTimeout(() => alertEl.remove(), 2500);
@@ -423,6 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCart();
 });
 </script>
+
 
   	  
   </body>
