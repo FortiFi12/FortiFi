@@ -41,6 +41,12 @@ header {
   border-color: #E8872C;
 }
 
+/* Toast */
+.toast-body {
+  background-color: #773AFD; /* Vibrant Purple for "Added to Cart" notification */
+  border-color: #773AFD;
+}
+
 /* Badge */
 #cartCount {
   background-color: #E8872C !important; /* Vibrant orange for Cart Number */
