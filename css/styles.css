@@ -94,7 +94,7 @@ footer a:hover {
   color: #773AFD; /* Purple Text */
 }
 
-body, p, ul, ol, li{
+body, p, ul, ol, li, .body{
   font-family: 'Quicksand', sans-serif;
 }
 
