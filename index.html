@@ -343,8 +343,10 @@
     <!-- End of the footer -->
 	
 	<!-- add this anywhere inside <body>, ideally just before your closing </body> -->
+<!-- Notification container (bottom‑right toast position) -->
 <div id="notificationContainer" style="position:fixed; bottom:80px; right:20px; z-index:2000;"></div>
 
+<!-- Cart + Notification Script -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const cart = [];
@@ -352,22 +354,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartDropdownMenu = document.getElementById('cartDropdownMenu');
   const notifContainer   = document.getElementById('notificationContainer');
 
-  // ─── Green notification helper ─────────────────────────────
+  <!-- showNotification › green bottom‑right pop‑up -->
   function showNotification(msg) {
     const alertEl = document.createElement('div');
-    alertEl.className = 'alert alert-success'; 
+    alertEl.className = 'alert alert-success';  // you can add your own CSS class here if you like
     alertEl.textContent = msg;
     notifContainer.appendChild(alertEl);
     setTimeout(() => alertEl.remove(), 2500);
   }
 
-  // ─── Rebuild cart dropdown ─────────────────────────────────
+  <!-- rebuild cart dropdown contents -->
   function updateCart() {
     cartCountEl.textContent = cart.length;
     cartDropdownMenu.innerHTML = '';
 
-    if (cart.length === 0) {
-      cartDropdownMenu.innerHTML = 
+    if (!cart.length) {
+      cartDropdownMenu.innerHTML =
         '<li class="dropdown-item text-muted">Cart is empty</li>';
       return;
     }
@@ -386,21 +388,16 @@ document.addEventListener('DOMContentLoaded', () => {
       cartDropdownMenu.appendChild(li);
     });
 
-    // total row
     cartDropdownMenu.insertAdjacentHTML('beforeend', `
       <li class="dropdown-item text-end fw-bold">Total: €${total.toFixed(2)}</li>
-    `);
-
-    // divider + checkout link
-    cartDropdownMenu.insertAdjacentHTML('beforeend','<li><hr class="dropdown-divider"></li>');
-    cartDropdownMenu.insertAdjacentHTML('beforeend',`
+      <li><hr class="dropdown-divider"></li>
       <li class="px-2">
         <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
       </li>
     `);
   }
 
-  // ─── Add‑to‑Cart binding ────────────────────────────────────
+  <!-- bind Add‑to‑Cart buttons -->
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
@@ -410,25 +407,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const size = sizeEl ? sizeEl.value : '';
       cart.push({ name, price, size });
       updateCart();
-      showNotification(`${name}${size ? ' ('+size+')' : ''} added to cart`);
+      showNotification(`${name}${size? ' ('+size+')':''} added to cart`);
     });
   });
 
-  // ─── Remove‑item delegation ───────────────────────────────
+  <!-- delegate “remove” clicks -->
   cartDropdownMenu.addEventListener('click', e => {
     if (e.target.classList.contains('remove-item')) {
-      const idx = parseInt(e.target.dataset.index, 10);
+      const idx = +e.target.dataset.index;
       cart.splice(idx, 1);
       updateCart();
     }
   });
 
-  // initial render
   updateCart();
 });
 </script>
-
-
 
   	  
   </body>
