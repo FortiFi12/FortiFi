@@ -263,11 +263,14 @@
       return;
     }
 
-    // Show the spinner modal
+    // Show spinner modal
     const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
     loadingModal.show();
 
-    // Do not clear cart or redirect — just keep spinner active
+    // Optionally: simulate endless loading or final processing
+    // If you want the cart cleared too, uncomment below:
+    // localStorage.removeItem("cart");
+    // setTimeout(() => loadingModal.hide(), 3000); // optional: auto-hide
   });
 </script>
 
