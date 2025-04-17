@@ -43,7 +43,7 @@ header {
 
 /* Toast */
 .my-notification .toast-body {
-  color: #773AFD; /* Vibrant Purple for "Added to Cart" notification */
+  color: #773AFD !important; /* Vibrant Purple for "Added to Cart" notification */
 }
 
 /* Badge */
