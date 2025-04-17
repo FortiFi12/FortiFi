@@ -42,10 +42,10 @@ header {
 }
 
 .alert-success.custom-notif {
-  background-color: #E8872C;  /* your green */
+  background-color: #E8872C;
 }
 .btn-success.custom-checkout {
-  background-color: #E8872C;  /* your purple */
+  background-color: #E8872C;
   border-color:   #E8872C;
 }
 
