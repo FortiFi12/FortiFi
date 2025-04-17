@@ -253,8 +253,12 @@
 
   updateCheckoutTable();
 </script>
+	  
+<!-- Bootstrap JS (required for modal to work) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-	  <script>
+<!-- Your Place Order Script -->
+<script>
   document.getElementById("placeOrderBtn").addEventListener("click", () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -263,16 +267,11 @@
       return;
     }
 
-    // Show spinner modal
     const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
     loadingModal.show();
-
-    // Optionally: simulate endless loading or final processing
-    // If you want the cart cleared too, uncomment below:
-    // localStorage.removeItem("cart");
-    // setTimeout(() => loadingModal.hide(), 3000); // optional: auto-hide
   });
 </script>
+
 
 
     <!-- ### End Scripts ### -->
