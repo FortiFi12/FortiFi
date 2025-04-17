@@ -52,6 +52,16 @@ header {
   text-color: #FFFFFF;
 }
 
+/* spinner color */
+.my-spinner {
+  color: #FFFFFF !important;
+}
+
+/* text color */
+.my-spinner-text {
+  color: #FFFFFF !important;
+}
+
 /* Badge */
 #cartCount {
   background-color: #E8872C !important; /* Vibrant orange for Cart Number */
