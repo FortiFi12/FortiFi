@@ -41,9 +41,12 @@ header {
   border-color: #E8872C;
 }
 
-/* Toast */
-.my-notification .toast-body {
-  color: #773AFD !important; /* Vibrant Purple for "Added to Cart" notification */
+.alert-success.custom-notif {
+  background-color: #773AFD;  /* your green */
+}
+.btn-success.custom-checkout {
+  background-color: #773AFD;  /* your purple */
+  border-color:   #773AFD;
 }
 
 /* Badge */
