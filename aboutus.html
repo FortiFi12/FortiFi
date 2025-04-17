@@ -332,57 +332,60 @@
     <!-- End of the footer -->
 	 
 	 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+document.addEventListener('DOMContentLoaded', () => {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    const cartCountEl      = document.getElementById('cartCount');
-    const cartDropdownMenu = document.getElementById('cartDropdownMenu');
-    const notifContainer   = document.getElementById('notificationContainer');
+  const cartCountEl      = document.getElementById('cartCount');
+  const cartDropdownMenu = document.getElementById('cartDropdownMenu');
 
-    function updateCart() {
-      cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-      cartDropdownMenu.innerHTML = '';
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 
-      if (!cart.length) {
-        cartDropdownMenu.innerHTML = '<li class="dropdown-item text-muted">Cart is empty</li>';
-        return;
-      }
+  function updateCart() {
+    cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    cartDropdownMenu.innerHTML = '';
 
-      let total = 0;
-      cart.forEach((item, idx) => {
-        total += item.price * item.qty;
-        const li = document.createElement('li');
-        li.className = 'dropdown-item d-flex justify-content-between align-items-center';
-        li.innerHTML = `
-          <div>
-            ${item.name}${item.size ? ' ('+item.size+')' : ''} — €${item.price} × ${item.qty}
-          </div>
-          <button class="btn btn-sm btn-link remove-item" data-index="${idx}">&times;</button>
-        `;
-        cartDropdownMenu.appendChild(li);
-      });
-
-      cartDropdownMenu.insertAdjacentHTML('beforeend', `
-        <li class="dropdown-item text-end fw-bold">Total: €${total.toFixed(2)}</li>
-        <li><hr class="dropdown-divider"></li>
-        <li class="px-2">
-          <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
-        </li>
-      `);
-
-      localStorage.setItem('cart', JSON.stringify(cart));
+    if (!cart.length) {
+      cartDropdownMenu.innerHTML = '<li class="dropdown-item text-muted">Cart is empty</li>';
+      return;
     }
 
-    cartDropdownMenu.addEventListener('click', e => {
-      if (e.target.classList.contains('remove-item')) {
-        const idx = +e.target.dataset.index;
-        cart.splice(idx, 1);
-        updateCart();
-      }
+    let total = 0;
+    cart.forEach((item, idx) => {
+      total += item.price * item.qty;
+      const li = document.createElement('li');
+      li.className = 'dropdown-item d-flex justify-content-between align-items-center';
+      li.innerHTML = `
+        <div>
+          ${item.name}${item.size ? ' ('+item.size+')' : ''} — €${item.price} × ${item.qty}
+        </div>
+        <button class="btn btn-sm btn-link remove-item" data-index="${idx}">&times;</button>
+      `;
+      cartDropdownMenu.appendChild(li);
     });
 
-    updateCart();
+    cartDropdownMenu.insertAdjacentHTML('beforeend', `
+      <li class="dropdown-item text-end fw-bold">Total: €${total.toFixed(2)}</li>
+      <li><hr class="dropdown-divider"></li>
+      <li class="px-2">
+        <a href="checkout.html" class="btn btn-success w-100">Checkout</a>
+      </li>
+    `);
+
+    saveCart();
+  }
+
+  cartDropdownMenu.addEventListener('click', e => {
+    if (e.target.classList.contains('remove-item')) {
+      const idx = +e.target.dataset.index;
+      cart.splice(idx, 1);
+      updateCart(); // will save cart
+    }
   });
+
+  updateCart();
+});
 </script>
 
   </body>

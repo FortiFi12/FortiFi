@@ -514,8 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cartDropdownMenu.innerHTML = '';
 
     if (!cart.length) {
-      cartDropdownMenu.innerHTML =
-        '<li class="dropdown-item text-muted">Cart is empty</li>';
+      cartDropdownMenu.innerHTML = '<li class="dropdown-item text-muted">Cart is empty</li>';
       return;
     }
 
@@ -541,10 +540,10 @@ document.addEventListener('DOMContentLoaded', () => {
       </li>
     `);
 
-    saveCart();
+    saveCart(); // Save after updating
   }
 
-  // Add-to-Cart logic with item merging
+  // Add-to-Cart button logic with item merging
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
@@ -565,20 +564,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Remove item from cart
+  // Handle removing items from dropdown
   cartDropdownMenu.addEventListener('click', e => {
     if (e.target.classList.contains('remove-item')) {
       const idx = +e.target.dataset.index;
       cart.splice(idx, 1);
-      updateCart();
+      updateCart(); // this will also save the cart
     }
   });
 
-  updateCart();
+  updateCart(); // Load cart on page load
 });
 </script>
-
-
   	  
   </body>
 </html>
