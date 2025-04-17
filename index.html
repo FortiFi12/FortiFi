@@ -429,7 +429,7 @@
 <!-- Notification container (bottom‑right toast position) -->
 <div id="notificationContainer" style="position:fixed; bottom:80px; right:20px; z-index:2000;"></div>
 
-<!-- Cart + Notification Script -->
+<!-- Cart + Notification Script with Item Merging -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -438,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartDropdownMenu = document.getElementById('cartDropdownMenu');
   const notifContainer   = document.getElementById('notificationContainer');
 
-  // showNotification › green bottom‑right pop‑up
   function showNotification(msg) {
     const alertEl = document.createElement('div');
     alertEl.className = 'alert alert-success custom-notif';
@@ -447,14 +446,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => alertEl.remove(), 2500);
   }
 
-  // Save cart to localStorage
   function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  // rebuild cart dropdown contents
   function updateCart() {
-    cartCountEl.textContent = cart.length;
+    cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
     cartDropdownMenu.innerHTML = '';
 
     if (!cart.length) {
@@ -465,12 +462,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let total = 0;
     cart.forEach((item, idx) => {
-      total += parseFloat(item.price);
+      total += item.price * item.qty;
       const li = document.createElement('li');
       li.className = 'dropdown-item d-flex justify-content-between align-items-center';
       li.innerHTML = `
         <div>
-          ${item.name}${item.size ? ' ('+item.size+')' : ''} — €${item.price}
+          ${item.name}${item.size ? ' ('+item.size+')' : ''} — €${item.price} × ${item.qty}
         </div>
         <button class="btn btn-sm btn-link remove-item" data-index="${idx}">&times;</button>
       `;
@@ -488,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveCart();
   }
 
-  // bind Add‑to‑Cart buttons
+  // Add-to-Cart logic with item merging
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const productEl = e.currentTarget.closest('.product');
@@ -496,15 +493,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const price = parseFloat(productEl.dataset.price);
       const sizeEl = productEl.querySelector('select[name="product_size"]');
       const size = sizeEl ? sizeEl.value : '';
-      const qty = 1;
 
-      cart.push({ name, price, size, qty });
+      const existing = cart.find(item => item.name === name && item.size === size);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, size, qty: 1 });
+      }
+
       updateCart();
       showNotification(`${name}${size ? ' (' + size + ')' : ''} added to cart`);
     });
   });
 
-  // delegate “remove” clicks
+  // Remove item from cart
   cartDropdownMenu.addEventListener('click', e => {
     if (e.target.classList.contains('remove-item')) {
       const idx = +e.target.dataset.index;
@@ -516,6 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCart();
 });
 </script>
+
 
   	  
   </body>

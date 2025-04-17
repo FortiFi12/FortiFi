@@ -211,7 +211,7 @@
     const tbody = document.getElementById("checkoutItems");
     const subtotalEl = document.getElementById("checkoutSubtotal");
 
-    tbody.innerHTML = ""; // Clear current items
+    tbody.innerHTML = "";
     let subtotal = 0;
 
     cart.forEach((item, index) => {
@@ -251,9 +251,9 @@
     updateCheckoutTable();
   }
 
-  // Call on page load
   updateCheckoutTable();
 </script>
+
 
     <!-- ### End Scripts ### -->
   </body>
