@@ -42,11 +42,11 @@ header {
 }
 
 .alert-success.custom-notif {
-  background-color: #773AFD;  /* your green */
+  background-color: #E8872C;  /* your green */
 }
 .btn-success.custom-checkout {
-  background-color: #773AFD;  /* your purple */
-  border-color:   #773AFD;
+  background-color: #E8872C;  /* your purple */
+  border-color:   #E8872C;
 }
 
 /* Badge */
