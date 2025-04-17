@@ -126,7 +126,33 @@
 </nav>
 <!-- End of navigation bar -->
 
-    
+	  <!-- “Added to cart” toast -->
+<div
+  class="position-fixed bottom-0 end-0 p-3"
+  style="z-index: 11"
+>
+  <div
+    id="cartToast"
+    class="toast align-items-center text-bg-success border-0"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        Item added to cart!
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
+</div>
+	  <!-- “Added to cart” toast -->
+	  
 	  <main class="h-10 d-flex flex-column justify-content-center align-items-start">
 	  
 		<!-- Start of section adapted from https://getbootstrap.com/docs/5.1/examples/album/ -->
@@ -307,48 +333,95 @@
     <!-- End of the footer -->
 	
 	<script>
-  // simple cart array
+  // cart as array of {name, size, price, quantity}
   const cart = [];
 
-  // find all "add-to-cart" buttons
+  // bootstrap toast instance
+  const toastEl = document.getElementById('cartToast');
+  const cartToast = new bootstrap.Toast(toastEl);
+
+  // set up all Add‑to‑Cart buttons
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', () => {
       const productEl = btn.closest('.product');
-      const name = productEl.dataset.name;
-      const price = parseFloat(productEl.dataset.price);
-      const sizeSelect = productEl.querySelector('select');
-      const size = sizeSelect ? sizeSelect.value : '';
-      
-      // push new item
-      cart.push({ name, size, price });
+      const name      = productEl.dataset.name;
+      const price     = parseFloat(productEl.dataset.price);
+      const size      = productEl.querySelector('select').value;
+
+      // find if already in cart
+      const existing = cart.find(
+        item => item.name === name && item.size === size
+      );
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ name, size, price, quantity: 1 });
+      }
+
       updateCartUI();
+      cartToast.show();
     });
   });
 
   function updateCartUI() {
-    // update badge
-    const countEl = document.getElementById('cartCount');
-    countEl.textContent = cart.length;
+    // badge count
+    document.getElementById('cartCount').textContent = cart
+      .reduce((sum, i) => sum + i.quantity, 0);
 
     // rebuild dropdown
     const menu = document.getElementById('cartDropdownMenu');
-    menu.innerHTML = ''; // clear
+    menu.innerHTML = '';
 
     if (cart.length === 0) {
-      menu.innerHTML = '<li><span class="dropdown-item-text">Your cart is empty.</span></li>';
+      menu.innerHTML = `
+        <li><span class="dropdown-item-text">Your cart is empty.</span></li>
+      `;
       return;
     }
 
-    cart.forEach(item => {
+    // list items
+    cart.forEach((item, idx) => {
       const li = document.createElement('li');
       li.innerHTML = `
-        <a class="dropdown-item" href="#">
-          ${item.name} (${item.size}) — $${item.price.toFixed(2)}
-        </a>`;
+        <div class="dropdown-item d-flex justify-content-between align-items-center">
+          <span>
+            ${item.name} (${item.size}) × ${item.quantity}
+          </span>
+          <button
+            class="btn btn-sm btn-link text-danger remove-item"
+            data-index="${idx}"
+            style="text-decoration:none"
+          >&times;</button>
+        </div>`;
       menu.appendChild(li);
+    });
+
+    // divider + total
+    const divider = document.createElement('li');
+    divider.innerHTML = '<hr class="dropdown-divider">';
+    menu.appendChild(divider);
+
+    const total = cart
+      .reduce((sum, i) => sum + i.price * i.quantity, 0)
+      .toFixed(2);
+    const totalLi = document.createElement('li');
+    totalLi.innerHTML = `
+      <span class="dropdown-item-text fw-bold">
+        Total: $${total}
+      </span>`;
+    menu.appendChild(totalLi);
+
+    // wire up remove‑buttons
+    menu.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const i = parseInt(e.currentTarget.dataset.index);
+        cart.splice(i, 1);
+        updateCartUI();
+      });
     });
   }
 </script>
+
   	  
   </body>
 </html>
