@@ -160,8 +160,6 @@ h4 {
 .carousel-control-next {
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
 }
 
 #productCarousel1, #productCarousel2 .carousel-control-prev {
