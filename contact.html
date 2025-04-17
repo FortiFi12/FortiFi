@@ -225,17 +225,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const cartCountEl      = document.getElementById('cartCount');
   const cartDropdownMenu = document.getElementById('cartDropdownMenu');
+  const notifContainer   = document.getElementById('notificationContainer');
+
+  function showNotification(msg) {
+    if (!notifContainer) return; // Allow other pages to skip it
+    const alertEl = document.createElement('div');
+    alertEl.className = 'alert alert-success custom-notif';
+    alertEl.textContent = msg;
+    notifContainer.appendChild(alertEl);
+    setTimeout(() => alertEl.remove(), 2500);
+  }
 
   function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   function updateCart() {
+    if (!cartCountEl || !cartDropdownMenu) return;
+
     cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
     cartDropdownMenu.innerHTML = '';
 
     if (!cart.length) {
       cartDropdownMenu.innerHTML = '<li class="dropdown-item text-muted">Cart is empty</li>';
+      saveCart(); // ✅ ensure empty cart is saved
       return;
     }
 
@@ -264,17 +277,43 @@ document.addEventListener('DOMContentLoaded', () => {
     saveCart();
   }
 
-  cartDropdownMenu.addEventListener('click', e => {
-    if (e.target.classList.contains('remove-item')) {
-      const idx = +e.target.dataset.index;
-      cart.splice(idx, 1);
-      updateCart(); // will save cart
-    }
+  // Remove items from cart
+  if (cartDropdownMenu) {
+    cartDropdownMenu.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-item')) {
+        const idx = +e.target.dataset.index;
+        cart.splice(idx, 1);
+        saveCart();    // ✅ important for keeping it empty after deletion
+        updateCart();
+      }
+    });
+  }
+
+  // Add-to-Cart logic (only runs on pages with add-to-cart buttons)
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const productEl = e.currentTarget.closest('.product');
+      const name  = productEl.dataset.name;
+      const price = parseFloat(productEl.dataset.price);
+      const sizeEl = productEl.querySelector('select[name="product_size"]');
+      const size = sizeEl ? sizeEl.value : '';
+
+      const existing = cart.find(item => item.name === name && item.size === size);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, size, qty: 1 });
+      }
+
+      updateCart();
+      showNotification(`${name}${size ? ' (' + size + ')' : ''} added to cart`);
+    });
   });
 
-  updateCart();
+  updateCart(); // Run on load
 });
 </script>
+
 
   </body>
 </html>
